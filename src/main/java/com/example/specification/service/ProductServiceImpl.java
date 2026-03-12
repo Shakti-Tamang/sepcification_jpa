@@ -6,6 +6,10 @@ import com.example.specification.model.Product;
 import com.example.specification.repository.ProductJpa;
 
 import lombok.RequiredArgsConstructor;
+import java.util.List;
+import org.springframework.data.jpa.domain.Specification;
+
+import com.example.specification.specification.ProductSpecification;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +21,16 @@ public class ProductServiceImpl implements ProductService {
     public void saveUserProduct(Product product) {
 
         productRepo.save(product);
+    }
+
+
+
+    @Override
+    public List<Product> getByActiveOrId(Long id, Boolean active){
+
+        Specification<Product> spec= Specification.allOf(ProductSpecification.productById(id),ProductSpecification.productByBoolean(active));
+
+        return productRepo.findAll(spec);
     }
 
 }
