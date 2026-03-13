@@ -26,7 +26,7 @@ public class ProductController {
 
         return ResponseEntity.ok("success");
     }
-
+// http://localhost:8095/getByActiveOrId?name=App&id=7&active=true
     @GetMapping("/getByActiveOrId")
     public ResponseEntity<?> getByActiveOrId(@RequestParam(value = "id", required = false) Long id,
                                              @RequestParam(value = "active", required = false) Boolean active,
