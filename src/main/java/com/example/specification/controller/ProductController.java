@@ -33,10 +33,11 @@ public class ProductController {
                                             
                                             @RequestParam(value = "name", required = false) String name,
                                             @RequestParam(value = "minPrice", required = false, defaultValue = "0") double minPrice,    
-                                            @RequestParam(value = "maxPrice", required = false, defaultValue = "0") double maxPrice
+                                            @RequestParam(value = "maxPrice", required = false, defaultValue = "0") double maxPrice,
+                                            @RequestParam(value = "status", required = false) String[] status       
                                              ) {
 
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice));
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice,status));
     }
 
 
