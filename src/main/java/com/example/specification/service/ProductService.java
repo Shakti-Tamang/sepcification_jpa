@@ -10,7 +10,8 @@ public interface ProductService {
 
  public List<Product> getByActiveOrId(Long id, Boolean active
     ,String name,double minPrice ,
-    double maxPrice                                                                         
+    double maxPrice   ,
+    String ... status                                                                     
  );  
 
 }
