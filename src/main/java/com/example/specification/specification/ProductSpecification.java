@@ -62,6 +62,11 @@ public class ProductSpecification {
     // beween specification
     public static Specification<Product> priceBetween(Double minPrice, Double maxPrice) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("price"), minPrice, maxPrice);
-    }       
+    } 
+    
+    // IN Operator
+    public static Specification<Product> statusIn(String... statuses) {
+        return (root, query, criteriaBuilder) -> root.get("status").in((Object[]) statuses);
+    }
 
 }
