@@ -23,10 +23,8 @@ public class ProductServiceImpl implements ProductService {
         productRepo.save(product);
     }
 
-
-
     @Override
-    public List<Product> getByActiveOrId(Long id, Boolean active){
+    public List<Product> getByActiveOrId(Long id, Boolean active, String name) {
 
         Specification<Product> spec = Specification.where(null);
 
@@ -36,6 +34,9 @@ public class ProductServiceImpl implements ProductService {
 
         if (active != null) {
             spec = spec.and(ProductSpecification.productByBoolean(active));
+        }
+        if (name != null) {
+            spec = spec.and(ProductSpecification.searchByName(name));
         }
 
         return productRepo.findAll(spec);

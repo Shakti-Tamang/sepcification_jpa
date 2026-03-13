@@ -29,9 +29,12 @@ public class ProductController {
 
     @GetMapping("/getByActiveOrId")
     public ResponseEntity<?> getByActiveOrId(@RequestParam(value = "id", required = false) Long id,
-                                             @RequestParam(value = "active", required = false) Boolean active) {
+                                             @RequestParam(value = "active", required = false) Boolean active,
+                                            
+                                            @RequestParam(value = "name", required = false) String name
+                                             ) {
 
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active));
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name));
     }
 
 
