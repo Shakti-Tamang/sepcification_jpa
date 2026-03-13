@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Data;
+
 import com.example.specification.enums.ProductStatus;
 
 import jakarta.persistence.Column;
@@ -17,6 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "products")
+@Data
 public class Product {
 
     @Id

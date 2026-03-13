@@ -3,6 +3,8 @@ package com.example.specification.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +27,12 @@ public class ProductController {
         return ResponseEntity.ok("success");
     }
 
-    @
+    @GetMapping("/getByActiveOrId")
+    public ResponseEntity<?> getByActiveOrId(@RequestParam(value = "id", required = false) Long id,
+                                             @RequestParam(value = "active", required = false) Boolean active) {
+
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active));
+    }
+
 
 }
