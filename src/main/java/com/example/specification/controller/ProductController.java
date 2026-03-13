@@ -31,10 +31,12 @@ public class ProductController {
     public ResponseEntity<?> getByActiveOrId(@RequestParam(value = "id", required = false) Long id,
                                              @RequestParam(value = "active", required = false) Boolean active,
                                             
-                                            @RequestParam(value = "name", required = false) String name
+                                            @RequestParam(value = "name", required = false) String name,
+                                            @RequestParam(value = "minPrice", required = false, defaultValue = "0") double minPrice,    
+                                            @RequestParam(value = "maxPrice", required = false, defaultValue = "0") double maxPrice
                                              ) {
 
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name));
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice));
     }
 
 

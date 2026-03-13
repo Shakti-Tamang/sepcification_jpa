@@ -58,4 +58,10 @@ public class ProductSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("name"), "%" + name + "%");
     }
 
+
+    // beween specification
+    public static Specification<Product> priceBetween(Double minPrice, Double maxPrice) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("price"), minPrice, maxPrice);
+    }       
+
 }

@@ -24,7 +24,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getByActiveOrId(Long id, Boolean active, String name) {
+    public List<Product> getByActiveOrId(Long id, Boolean active,String name,double minPrice ,
+    double maxPrice   )          {                                                              
 
         Specification<Product> spec = Specification.where(null);
 
@@ -38,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
         if (name != null) {
             spec = spec.and(ProductSpecification.searchByName(name));
         }
+        if (minPrice != 0 || maxPrice != 0) {
+            spec = spec.and(ProductSpecification.priceBetween(minPrice, maxPrice));
+        }
+        if (spec == null) {
+            return productRepo.findAll();
+        }   
 
         return productRepo.findAll(spec);
     }
