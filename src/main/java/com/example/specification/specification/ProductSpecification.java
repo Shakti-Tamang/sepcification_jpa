@@ -1,5 +1,8 @@
 package com.example.specification.specification;
 
+import javax.swing.Spring;
+
+import org.hibernate.annotations.processing.SQL;
 import org.hibernate.metamodel.mapping.ForeignKeyDescriptor.Side;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -10,6 +13,19 @@ public class ProductSpecification {
     private ProductSpecification() {
     
     }
+
+
+//     Specification
+//      ↓
+// root → table reference
+//      ↓
+// criteriaBuilder → build condition
+//      ↓
+// query → combine into full SQL
+//      ↓
+// Spring Data JPA
+//      ↓
+// SQL executed in database
  
 
 //     The three parameters:
@@ -35,6 +51,11 @@ public class ProductSpecification {
 
     public static Specification<Product> productByBoolean(Boolean isActive) {
        return (root,query,criteriaBilder)->criteriaBilder.equal(root.get("active"),isActive);
+    }
+
+
+    public static Specification<Product> searchByName(String name) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("name"), "%" + name + "%");
     }
 
 }

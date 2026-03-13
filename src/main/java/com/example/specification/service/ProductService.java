@@ -8,6 +8,8 @@ public interface ProductService {
 
     public void saveUserProduct(Product  product);
 
- public List<Product> getByActiveOrId(Long id, Boolean active);  
+ public List<Product> getByActiveOrId(Long id, Boolean active
+    ,String name
+ );  
 
 }
