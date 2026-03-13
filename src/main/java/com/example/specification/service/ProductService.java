@@ -9,7 +9,8 @@ public interface ProductService {
     public void saveUserProduct(Product  product);
 
  public List<Product> getByActiveOrId(Long id, Boolean active
-    ,String name
+    ,String name,double minPrice ,
+    double maxPrice                                                                         
  );  
 
 }
