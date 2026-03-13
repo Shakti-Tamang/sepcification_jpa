@@ -28,7 +28,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getByActiveOrId(Long id, Boolean active){
 
-        Specification<Product> spec= Specification.allOf(ProductSpecification.productById(id),ProductSpecification.productByBoolean(active));
+        Specification<Product> spec = Specification.where(null);
+
+        if (id != null) {
+            spec = spec.and(ProductSpecification.productById(id));
+        }
+
+        if (active != null) {
+            spec = spec.and(ProductSpecification.productByBoolean(active));
+        }
 
         return productRepo.findAll(spec);
     }
