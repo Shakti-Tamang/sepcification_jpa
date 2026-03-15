@@ -98,6 +98,11 @@ public class ProductSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get("createdAt"), dateTime);
     }
 
+    // product added from to
+    public static Specification<Product> createdBetween(LocalDateTime start, LocalDateTime end) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("createdAt"), start, end);
+    }
+
 
 
 
