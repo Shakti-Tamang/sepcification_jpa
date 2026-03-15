@@ -39,7 +39,7 @@ public class ProductController {
                                             @RequestParam(value="userId", required = false) Long userId
                                              ) {
 
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice));
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice,userId,status));
     }
 
 
