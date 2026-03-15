@@ -69,6 +69,9 @@ public class ProductServiceImpl implements ProductService {
         if (dateTime != null) {
             spec = spec.and(ProductSpecification.createAfter(dateTime));
         }
+        if (start != null && end != null) {
+            spec = spec.and(ProductSpecification.createdBetween(start, end));
+        }
         if (spec == null) {
             return productRepo.findAll();
         }   
