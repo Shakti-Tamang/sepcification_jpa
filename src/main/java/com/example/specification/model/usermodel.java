@@ -1,14 +1,15 @@
 package com.example.specification.model;
-
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import jakarta.persistence.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import com.example.specification.enums.ProductStatus;
-import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,13 +18,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
-@Table(name = "products")
-@Data
-public class Product {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@Table(name = "users")
+public class usermodel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,13 +52,8 @@ public class Product {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "usermodel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("usermodel-products")
+    private List<Product> products;
 
-
-    @ManyToOne()
-    @JoinColumn(name = "usermodel_id")
-    private usermodel usermodel;
-
-
-
-    // getters & setters
 }

@@ -60,6 +60,7 @@ public class ProductSpecification {
 
 
     // beween specification
+    // WHERE price BETWEEN 100 AND 500
     public static Specification<Product> priceBetween(Double minPrice, Double maxPrice) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("price"), minPrice, maxPrice);
     } 
