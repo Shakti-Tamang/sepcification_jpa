@@ -1,7 +1,7 @@
 package com.example.specification.service;
 
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import com.example.specification.model.Product;
 import com.example.specification.repository.ProductJpa;
 
@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
    public List<Product> getByActiveOrId(Long id, Boolean active
     ,String name,double minPrice ,
        
-    double maxPrice   ,  Long userId   ,String ... status
+    double maxPrice   ,  Long userId ,LocalDateTime dateTime  ,String ... status
                                                                    
  )     {                                                              
 
@@ -65,6 +65,9 @@ public class ProductServiceImpl implements ProductService {
         }
         if (userId != null) {
             spec = spec.and(ProductSpecification.userIdEquals(userId));
+        }
+        if (dateTime != null) {
+            spec = spec.and(ProductSpecification.createAfter(dateTime));
         }
         if (spec == null) {
             return productRepo.findAll();
