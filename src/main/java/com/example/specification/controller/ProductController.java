@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.time.LocalDateTime;
 import com.example.specification.model.Product;
 import com.example.specification.service.ProductService;
 
@@ -36,10 +36,11 @@ public class ProductController {
                                             @RequestParam(value = "minPrice", required = false, defaultValue = "0") double minPrice,    
                                             @RequestParam(value = "maxPrice", required = false, defaultValue = "0") double maxPrice,
                                             @RequestParam(value = "status", required = false) String[] status ,
-                                            @RequestParam(value="userId", required = false) Long userId
+                                            @RequestParam(value="userId", required = false) Long userId,
+                                            @RequestParam(value="dateTime", required = false) LocalDateTime dateTime
                                              ) {
 
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice,userId,status));
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice,userId,dateTime,status));
     }
 
 
