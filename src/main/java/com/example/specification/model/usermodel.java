@@ -52,7 +52,7 @@ public class usermodel {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "usermodel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usermodel", cascade = CascadeType.ALL, orphanRemoval = true,fetch = jakarta.persistence.FetchType.LAZY)
     @JsonManagedReference("usermodel-products")
     private List<Product> products;
 
