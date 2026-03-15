@@ -65,8 +65,8 @@ public class ProductSpecification {
     } 
     
     // IN Operator
-    public static Specification<Product> statusIn(String statuses) {
-        return (root, query, criteriaBuilder) -> root.get("status").in( statuses);
+    public static Specification<Product> statusIn(String... statuses) {
+        return (root, query, criteriaBuilder) -> root.get("status").in((Object[]) statuses);
     }
 
 }
