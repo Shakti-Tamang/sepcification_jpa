@@ -10,7 +10,9 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 
 import com.example.specification.model.Product;
+import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
 public class ProductSpecification {
 
     private ProductSpecification() {
@@ -58,7 +60,15 @@ public class ProductSpecification {
 
 
     public static Specification<Product> searchByName(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("name"), "%" + name + "%");
+        return (root, query, criteriaBuilder) -> {
+            if (name == null || name.isBlank()) {
+                return criteriaBuilder.conjunction();
+            }
+            return criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("name")),
+                    "%" + name.toLowerCase() + "%"
+            );
+        };
     }
 
 
@@ -83,5 +93,12 @@ public class ProductSpecification {
             return criteriaBuilder.equal(userJoin.get("id"), userId);
         };
     }
+
+    public static Specification<Product> createAfter(LocalDateTime dateTime) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get("createdAt"), dateTime);
+    }
+
+
+
 
 }
