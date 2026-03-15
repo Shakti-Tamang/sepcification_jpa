@@ -6,6 +6,9 @@ import org.hibernate.annotations.processing.SQL;
 import org.hibernate.metamodel.mapping.ForeignKeyDescriptor.Side;
 import org.springframework.data.jpa.domain.Specification;
 
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+
 import com.example.specification.model.Product;
 
 public class ProductSpecification {
@@ -68,6 +71,17 @@ public class ProductSpecification {
     // IN Operator
     public static Specification<Product> statusIn(String... statuses) {
         return (root, query, criteriaBuilder) -> root.get("status").in((Object[]) statuses);
+    }
+
+    public static Specification<Product> userIdEquals(Long userId) {
+        return (root, query, criteriaBuilder) -> {
+            if (userId == null) {
+                return criteriaBuilder.conjunction();
+            }
+
+            Join<Object, Object> userJoin = root.join("usermodel", JoinType.INNER);
+            return criteriaBuilder.equal(userJoin.get("id"), userId);
+        };
     }
 
 }
