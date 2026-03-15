@@ -37,10 +37,12 @@ public class ProductController {
                                             @RequestParam(value = "maxPrice", required = false, defaultValue = "0") double maxPrice,
                                             @RequestParam(value = "status", required = false) String[] status ,
                                             @RequestParam(value="userId", required = false) Long userId,
-                                            @RequestParam(value="dateTime", required = false) LocalDateTime dateTime
+                                            @RequestParam(value="dateTime", required = false) LocalDateTime dateTime,
+                                            @RequestParam(value="start", required = false) LocalDateTime start,
+                                            @RequestParam(value="end", required = false) LocalDateTime end
                                              ) {
 
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice,userId,dateTime,status));
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active,name,minPrice,maxPrice,userId,dateTime,start,end,status));
     }
 
 

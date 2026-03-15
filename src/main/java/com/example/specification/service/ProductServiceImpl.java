@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
    public List<Product> getByActiveOrId(Long id, Boolean active
     ,String name,double minPrice ,
        
-    double maxPrice   ,  Long userId ,LocalDateTime dateTime  ,String ... status
+    double maxPrice   ,  Long userId ,LocalDateTime dateTime  ,LocalDateTime start, LocalDateTime end,String ... status
                                                                    
  )     {                                                              
 
