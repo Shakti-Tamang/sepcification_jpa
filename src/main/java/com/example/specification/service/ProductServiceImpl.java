@@ -7,19 +7,33 @@ import com.example.specification.repository.ProductJpa;
 
 import lombok.RequiredArgsConstructor;
 import java.util.List;
+import java.util. ArrayList;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.example.specification.specification.ProductSpecification;
-
+import com.example.specification.repository.UserRepostory;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductJpa productRepo;
+        private final UserRepostory userRepostory;
 
     @Override
-    public void saveUserProduct(Product product) {
+    public void saveUserProduct(Product product, Long userId) {
+        var user = userRepostory.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
+
+        product.setUsermodel(user);
+
+        if(user.getProducts() == null) {
+            user.setProducts(new ArrayList<>());
+        }
+
+        user.getProducts().add(product);
+
+    
+     
         productRepo.save(product);
     }
 
