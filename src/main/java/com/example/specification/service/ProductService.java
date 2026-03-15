@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    public void saveUserProduct(Product  product);
+    public void saveUserProduct(Product  product, Long userId);
 
  public List<Product> getByActiveOrId(Long id, Boolean active
     ,String name,double minPrice ,
