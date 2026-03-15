@@ -38,9 +38,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getByActiveOrId(Long id, Boolean active,String name,double minPrice ,
-    double maxPrice  ,
- String ... status   )          {                                                              
+   public List<Product> getByActiveOrId(Long id, Boolean active
+    ,String name,double minPrice ,
+        Long userId   ,
+    double maxPrice   ,String ... status
+                                                                   
+ )     {                                                              
 
         Specification<Product> spec = Specification.where(null);
 
@@ -59,6 +62,9 @@ public class ProductServiceImpl implements ProductService {
         }
         if (status != null && status.length > 0) {
             spec = spec.and(ProductSpecification.statusIn(status));
+        }
+        if (userId != null) {
+            spec = spec.and(ProductSpecification.userIdEquals(userId));
         }
         if (spec == null) {
             return productRepo.findAll();
