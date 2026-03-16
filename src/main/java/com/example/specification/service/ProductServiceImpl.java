@@ -31,50 +31,26 @@ public class ProductServiceImpl implements ProductService {
         }
 
         user.getProducts().add(product);
-
-    
-     
         productRepo.save(product);
     }
 
     @Override
    public List<Product> getByActiveOrId(Long id, Boolean active
-    ,String name,double minPrice ,
+    ,String name,Double minPrice ,
        
-    double maxPrice   ,  Long userId ,LocalDateTime dateTime  ,LocalDateTime start, LocalDateTime end,String ... status
+    Double maxPrice   ,  Long userId ,LocalDateTime dateTime  ,LocalDateTime start, LocalDateTime end,String ... status
                                                                    
  )     {                                                              
 
-        Specification<Product> spec = Specification.where(null);
-
-        if (id != null) {
-            spec = spec.and(ProductSpecification.productById(id));
-        }
-
-        if (active != null) {
-            spec = spec.and(ProductSpecification.productByBoolean(active));
-        }
-        if (name != null) {
-            spec = spec.and(ProductSpecification.searchByName(name));
-        }
-        if (minPrice != 0 || maxPrice != 0) {
-            spec = spec.and(ProductSpecification.priceBetween(minPrice, maxPrice));
-        }
-        if (status != null && status.length > 0) {
-            spec = spec.and(ProductSpecification.statusIn(status));
-        }
-        if (userId != null) {
-            spec = spec.and(ProductSpecification.userIdEquals(userId));
-        }
-        if (dateTime != null) {
-            spec = spec.and(ProductSpecification.createAfter(dateTime));
-        }
-        if (start != null && end != null) {
-            spec = spec.and(ProductSpecification.createdBetween(start, end));
-        }
-        if (spec == null) {
-            return productRepo.findAll();
-        }   
+        Specification<Product> spec = Specification
+                .where(ProductSpecification.productById(id))
+                .and(ProductSpecification.isActive(active))
+                .and(ProductSpecification.nameContains(name))
+                .and(ProductSpecification.priceBetween(minPrice, maxPrice))
+                .and(ProductSpecification.statusIn(status))
+                .and(ProductSpecification.userIdEquals(userId))
+                .and(ProductSpecification.createAfter(dateTime))
+                .and(ProductSpecification.createdBetween(start, end));
 
         return productRepo.findAll(spec);
     }
