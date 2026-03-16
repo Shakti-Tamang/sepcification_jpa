@@ -32,9 +32,9 @@ public class ProductController {
     public ResponseEntity<?> getByActiveOrId(@RequestParam(value = "id", required = false) Long id,
                                              @RequestParam(value = "active", required = false) Boolean active,
                                             
-                                            @RequestParam(value = "name", required = false) String name,
-                                            @RequestParam(value = "minPrice", required = false, defaultValue = "0") double minPrice,    
-                                            @RequestParam(value = "maxPrice", required = false, defaultValue = "0") double maxPrice,
+                                            @RequestParam(value = "search", required = false) String name,
+                                            @RequestParam(value = "minPrice", required = false) Double minPrice,
+                                            @RequestParam(value = "maxPrice", required = false) Double maxPrice,
                                             @RequestParam(value = "status", required = false) String[] status ,
                                             @RequestParam(value="userId", required = false) Long userId,
                                             @RequestParam(value="dateTime", required = false) LocalDateTime dateTime,
