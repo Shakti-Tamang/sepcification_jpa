@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.example.specification.enums.ProductStatus;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
@@ -51,6 +51,7 @@ public class Product {
 
     @ManyToOne()
     @JoinColumn(name = "usermodel_id")
+    @JsonBackReference("usermodel-products")
     private usermodel usermodel;
 
 

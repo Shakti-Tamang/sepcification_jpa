@@ -1,4 +1,5 @@
 package com.example.specification.model;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,25 +35,16 @@ public class usermodel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
     @Column(nullable = false)
     private String name;
 
     @Column(length = 1000)
-    private String description;
+    private String email;
 
-    private Double price;
+    @Column(length = 1000)
+    private String password;
 
-    @Enumerated(EnumType.STRING)
-    private ProductStatus status;
-
-    private Boolean active;
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "usermodel", cascade = CascadeType.ALL, orphanRemoval = true,fetch = jakarta.persistence.FetchType.LAZY)
+    @OneToMany(mappedBy = "usermodel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = jakarta.persistence.FetchType.LAZY)
     @JsonManagedReference("usermodel-products")
     private List<Product> products;
 
