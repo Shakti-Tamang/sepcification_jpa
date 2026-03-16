@@ -15,6 +15,9 @@ public class ProductSpecification {
     
     }
 
+
+    // For a NestJS project, FileZilla is commonly used with Hostinger or VPS when you don't have CI/CD set up — you just build locally and upload the files manually.
+
     // ❌ Complex joins across multiple tables
 // ❌ GROUP BY / aggregate functions (SUM, COUNT, AVG)
 // ❌ Subqueries easily

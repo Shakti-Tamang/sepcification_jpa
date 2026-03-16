@@ -9,4 +9,5 @@ import com.example.specification.model.Product;
 @Repository
 public interface ProductJpa extends JpaRepository<Product,Long >, JpaSpecificationExecutor<Product>{
 
+    
 }
