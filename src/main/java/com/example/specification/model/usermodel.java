@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.*;
 import jakarta.persistence.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import com.example.specification.enums.ProductStatus;
@@ -18,6 +19,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import java.util.List;
@@ -47,5 +49,9 @@ public class usermodel {
     @OneToMany(mappedBy = "usermodel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = jakarta.persistence.FetchType.LAZY)
     @JsonManagedReference("usermodel-products")
     private List<Product> products;
+
+    @ManyToMany(mappedBy = "users", cascade ={CascadeType.PERSIST, CascadeType.MERGE})
+     @JsonIgnoreProperties("courses") 
+    private List<Course> courses;
 
 }
