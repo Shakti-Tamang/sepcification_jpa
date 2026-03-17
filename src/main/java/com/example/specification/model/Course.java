@@ -35,6 +35,7 @@ public class Course {
     private Long id;
 
 
+    private String name;
     @ManyToMany(fetch = jakarta.persistence.FetchType.LAZY)
     @JoinTable(
         name = "course_user",
