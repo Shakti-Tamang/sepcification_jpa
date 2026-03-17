@@ -1,4 +1,6 @@
 package com.example.specification.service;
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.specification.repository.UserRepostory;
@@ -13,5 +15,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(usermodel usermodel) {
         userRepostory.save(usermodel);
+    }
+
+    @Override
+    public List<usermodel> getAllUsers() {
+        return userRepostory.findAll();
+    }
+
+    @Override
+    public usermodel getUserById(Long id) {
+        return userRepostory.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
