@@ -114,6 +114,37 @@ public class ProductServiceImpl implements ProductService {
                 .and(ProductSpecification.createdBetween(start, end));
     }
 
+
+
+
+//     Your code prevents crash mainly by using a default value.
+
+// String field = (sortBy == null || sortBy.isBlank()) ? "id" : sortBy;
+//  What this means:
+
+// If user doesn’t send sortBy → use "id"
+
+// If user sends empty → use "id"
+
+//  Without this:
+// Sort.by(sortBy);
+
+// If sortBy = null →  crash
+
+//  With your code:
+// sortBy = null → field = "id"
+
+//  Always safe
+//  No null error
+
+// Important (very simple)
+
+// It only prevents crash from null/empty,
+// but not from wrong field name.
+
+// Final simple line:
+
+// It prevents crash by replacing null or empty input with a safe default value (id) so sorting always works.
         private Sort buildSort(String sortBy, String sortDir) {
         String field = (sortBy == null || sortBy.isBlank()) ? "id" : sortBy;
         Sort.Direction direction = "desc".equalsIgnoreCase(sortDir)
