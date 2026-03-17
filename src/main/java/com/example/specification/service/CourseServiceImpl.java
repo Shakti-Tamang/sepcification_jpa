@@ -1,6 +1,7 @@
 package com.example.specification.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,17 @@ public class CourseServiceImpl implements  CourseService {
 
         courseRepo.save(course);
 
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseRepo.findAll();
+    }
+
+    @Override
+    public Course getCourseById(Long id) {
+        return courseRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
 }

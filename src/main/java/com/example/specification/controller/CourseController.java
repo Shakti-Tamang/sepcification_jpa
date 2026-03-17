@@ -1,6 +1,8 @@
 package com.example.specification.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,16 @@ public class CourseController {
     public ResponseEntity<?> saveCourse(@RequestBody Course course, @RequestParam("userId") Long userId) {
         courtsService.saveCourse(course, userId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllCourses() {
+        return ResponseEntity.ok(courtsService.getAllCourses());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCourseById(@PathVariable Long id) {
+        return ResponseEntity.ok(courtsService.getCourseById(id));
     }
 
 }
