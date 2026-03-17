@@ -1,18 +1,20 @@
 package com.example.specification.service;
 
-import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
-import com.example.specification.model.Product;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
 import com.example.specification.dto.ProductDto;
+import com.example.specification.model.Product;
 import com.example.specification.repository.ProductJpa;
+import com.example.specification.repository.UserRepostory;
+import com.example.specification.specification.ProductSpecification;
 
 import lombok.RequiredArgsConstructor;
-import java.util.List;
-import java.util.ArrayList;
-import org.springframework.data.jpa.domain.Specification;
-
-import com.example.specification.specification.ProductSpecification;
-import com.example.specification.repository.UserRepostory;
 
 @Service
 @RequiredArgsConstructor
@@ -42,10 +44,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getByActiveOrId(Long id, Boolean active,
             String name, Double minPrice,
             Double maxPrice, Long userId, LocalDateTime dateTime,
-            LocalDateTime start, LocalDateTime end, String... status) {
+            LocalDateTime start, LocalDateTime end, String sortBy, String sortDir, String... status) {
 
         Specification<Product> spec = buildSpec(id, active, name, minPrice, maxPrice, userId, dateTime, start, end, status);
-        return productRepo.findAll(spec);
+        return productRepo.findAll(spec, buildSort(sortBy, sortDir));
     }
 
     @Override
@@ -77,11 +79,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto searchWithSummary(Long userId, Long id, Boolean active,
             String name, Double minPrice, Double maxPrice,
             LocalDateTime dateTime, LocalDateTime start, LocalDateTime end,
+            String sortBy, String sortDir,
             String... status) {
 
         // STEP 1 — Specification: flexible, any filter can be null
         Specification<Product> spec = buildSpec(id, active, name, minPrice, maxPrice, userId, dateTime, start, end, status);
-        List<Product> filtered = productRepo.findAll(spec);
+        List<Product> filtered = productRepo.findAll(spec, buildSort(sortBy, sortDir));
 
         // aggregate the filtered list in memory
         double filteredTotal = filtered.stream()
@@ -100,8 +103,8 @@ public class ProductServiceImpl implements ProductService {
             Double minPrice, Double maxPrice, Long userId,
             LocalDateTime dateTime, LocalDateTime start, LocalDateTime end,
             String... status) {
-        return Specification
-                .where(ProductSpecification.productById(id))
+        return ((Specification<Product>) (root, query, cb) -> cb.conjunction())
+            .and(ProductSpecification.productById(id))
                 .and(ProductSpecification.isActive(active))
                 .and(ProductSpecification.nameContains(name))
                 .and(ProductSpecification.priceBetween(minPrice, maxPrice))
@@ -110,4 +113,12 @@ public class ProductServiceImpl implements ProductService {
                 .and(ProductSpecification.createAfter(dateTime))
                 .and(ProductSpecification.createdBetween(start, end));
     }
+
+        private Sort buildSort(String sortBy, String sortDir) {
+        String field = (sortBy == null || sortBy.isBlank()) ? "id" : sortBy;
+        Sort.Direction direction = "desc".equalsIgnoreCase(sortDir)
+            ? Sort.Direction.DESC
+            : Sort.Direction.ASC;
+        return Sort.by(direction, field);
+        }
 }

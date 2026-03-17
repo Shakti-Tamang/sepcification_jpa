@@ -40,8 +40,10 @@ public class ProductController {
                                              @RequestParam(value = "userId", required = false) Long userId,
                                              @RequestParam(value = "dateTime", required = false) LocalDateTime dateTime,
                                              @RequestParam(value = "start", required = false) LocalDateTime start,
-                                             @RequestParam(value = "end", required = false) LocalDateTime end) {
-        return ResponseEntity.ok(productService.getByActiveOrId(id, active, name, minPrice, maxPrice, userId, dateTime, start, end, status));
+                                             @RequestParam(value = "end", required = false) LocalDateTime end,
+                                             @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
+                                             @RequestParam(value = "sortDir", required = false, defaultValue = "asc") String sortDir) {
+        return ResponseEntity.ok(productService.getByActiveOrId(id, active, name, minPrice, maxPrice, userId, dateTime, start, end, sortBy, sortDir, status));
     }
 
     /**
@@ -65,11 +67,13 @@ public class ProductController {
             @RequestParam(value = "status",    required = false) String[] status,
             @RequestParam(value = "dateTime",  required = false) LocalDateTime dateTime,
             @RequestParam(value = "start",     required = false) LocalDateTime start,
-            @RequestParam(value = "end",       required = false) LocalDateTime end) {
+            @RequestParam(value = "end",       required = false) LocalDateTime end,
+            @RequestParam(value = "sortBy",    required = false, defaultValue = "id") String sortBy,
+            @RequestParam(value = "sortDir",   required = false, defaultValue = "asc") String sortDir) {
 
         return ResponseEntity.ok(
                 productService.searchWithSummary(userId, id, active, name,
-                        minPrice, maxPrice, dateTime, start, end, status));
+                minPrice, maxPrice, dateTime, start, end, sortBy, sortDir, status));
     }
 }
 

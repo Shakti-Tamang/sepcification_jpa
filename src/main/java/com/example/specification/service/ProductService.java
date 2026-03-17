@@ -15,7 +15,7 @@ public interface ProductService {
     List<Product> getByActiveOrId(Long id, Boolean active,
         String name, Double minPrice,
         Double maxPrice, Long userId, LocalDateTime dateTime,
-        LocalDateTime start, LocalDateTime end, String... status);
+        LocalDateTime start, LocalDateTime end, String sortBy, String sortDir, String... status);
 
     Double getTotalPriceBySpec(Long id, Boolean active,
         String name, Double minPrice,
@@ -30,5 +30,6 @@ public interface ProductService {
     ProductDto searchWithSummary(Long userId, Long id, Boolean active,
         String name, Double minPrice, Double maxPrice,
         LocalDateTime dateTime, LocalDateTime start, LocalDateTime end,
+        String sortBy, String sortDir,
         String... status);
 }
