@@ -80,7 +80,7 @@ public class ProductSpecification {
 
     public static Specification<Product> nameContains(String name) {
 
-        // 
+        // name coming from db is also changed to lower case and 
         return (root, query, criteriaBuilder) -> {
             if (name == null || name.isBlank()) {
                 return criteriaBuilder.conjunction();
