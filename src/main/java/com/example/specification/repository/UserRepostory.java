@@ -12,7 +12,7 @@ import com.example.specification.model.usermodel;
 public interface UserRepostory extends JpaRepository<usermodel, Long>, JpaSpecificationExecutor<usermodel> {
 
 	@Override
-	@EntityGraph(attributePaths = {"courses"})
+	@EntityGraph(attributePaths = {"courses","p"})
 	List<usermodel> findAll();
 
 	@Override
