@@ -1,10 +1,11 @@
 package com.example.specification.specification;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import com.example.specification.enums.ProductStatus;
 import com.example.specification.model.Product;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
@@ -78,6 +79,8 @@ public class ProductSpecification {
     }
 
     public static Specification<Product> nameContains(String name) {
+
+        // 
         return (root, query, criteriaBuilder) -> {
             if (name == null || name.isBlank()) {
                 return criteriaBuilder.conjunction();
