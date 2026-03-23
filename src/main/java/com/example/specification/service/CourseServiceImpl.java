@@ -3,6 +3,9 @@ package com.example.specification.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.specification.model.Product;
+import com.example.specification.specification.ProductSpecification;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.specification.model.Course;
@@ -62,6 +65,12 @@ public class CourseServiceImpl implements  CourseService {
 //        List<Integer>all=List.of(1,2,3,4,5);
 
 
+        Specification<Course>spec=((Specification<Course>) (root, query, cb) -> cb.conjunction()).and(ProductSpecification.CourseForUser(UserId));
+
+        List<Course>list=courseRepo.findAll(spec);
+
+
+        return list.isEmpty()?List.of():list;
     }
 
 }
