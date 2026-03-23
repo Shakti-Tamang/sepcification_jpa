@@ -2,6 +2,7 @@ package com.example.specification.specification;
 
 import java.time.LocalDateTime;
 
+import com.example.specification.model.Course;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.example.specification.enums.ProductStatus;
@@ -150,6 +151,23 @@ public class ProductSpecification {
             Join<Object, Object> userJoin = root.join("usermodel", JoinType.INNER);
             return criteriaBuilder.equal(userJoin.get("id"), userId);
         };
+    }
+
+    public static Specification<Course>  CourseForUser(Long userId){
+
+        return (root,query,criteriaBuilder)->{
+
+            if(userId==null){
+
+                return criteriaBuilder.conjunction();
+            }
+
+            Join<Object,Object>userJoin=root.join("users",JoinType.INNER);
+
+            return criteriaBuilder.equal(userJoin.get("id"),userId);
+        };
+
+
     }
 
     public static Specification<Product> createAfter(LocalDateTime dateTime) {

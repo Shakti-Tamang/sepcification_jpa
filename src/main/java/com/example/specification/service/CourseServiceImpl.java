@@ -55,4 +55,13 @@ public class CourseServiceImpl implements  CourseService {
                 .orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
+    @Override
+    public List<Course> getCourseForGivenUser(Long UserId) {
+//        return List.of();
+
+//        List<Integer>all=List.of(1,2,3,4,5);
+
+
+    }
+
 }

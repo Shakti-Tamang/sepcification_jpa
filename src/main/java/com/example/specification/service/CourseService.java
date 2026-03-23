@@ -12,4 +12,6 @@ public interface CourseService {
 
     public Course getCourseById(Long id);
 
+    public List<Course> getCourseForGivenUser(Long UserId);
+
 }
