@@ -14,6 +14,8 @@ import com.example.specification.service.CourseService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -38,6 +40,14 @@ public class CourseController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getCourseById(@PathVariable Long id) {
         return ResponseEntity.ok(courtsService.getCourseById(id));
+    }
+
+        @GetMapping("/user/{userId}")
+    public  ResponseEntity<?> getAsscoitedCourse(@PathVariable("userId") Long userId){
+
+
+            List<Course>list=courtsService.getCourseForGivenUser(userId);
+        return  ResponseEntity.ok(list);
     }
 
 }
