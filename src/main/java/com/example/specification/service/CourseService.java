@@ -14,4 +14,6 @@ public interface CourseService {
 
     public List<Course> getCourseForGivenUser(Long UserId);
 
+    public void deleteCourseById(Long id);
+
 }
