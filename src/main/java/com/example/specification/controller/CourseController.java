@@ -1,13 +1,7 @@
 package com.example.specification.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.specification.model.Course;
 import com.example.specification.service.CourseService;
@@ -48,6 +42,14 @@ public class CourseController {
 
             List<Course>list=courtsService.getCourseForGivenUser(userId);
         return  ResponseEntity.ok(list);
+    }
+
+    @DeleteMapping("/deleteCourse")
+    public ResponseEntity<?>  deleteCourse(@RequestParam("id") Long id){
+
+        courtsService.deleteCourseById(id);
+
+        return  ResponseEntity.ok("successfully deleted course");
     }
 
 }

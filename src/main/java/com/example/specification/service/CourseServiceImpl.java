@@ -73,4 +73,9 @@ public class CourseServiceImpl implements  CourseService {
         return list.isEmpty()?List.of():list;
     }
 
+    @Override
+    public void deleteCourseById(Long id) {
+        courseRepo.deleteById(id);
+    }
+
 }
