@@ -10,11 +10,6 @@ import org.springframework.stereotype.Service;
 public class RecordClass {
 
     usermodel usermodel=new usermodel();
-
-
-
-
-
     public void test(){
 
         System.out.println(usermodel.getName());
