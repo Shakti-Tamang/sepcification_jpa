@@ -14,6 +14,8 @@ import com.example.specification.service.UserService;
 import com.example.specification.model.usermodel;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Validated
@@ -27,6 +29,15 @@ public class UserController {
 
             return ResponseEntity.ok("success");
         }
+
+        @PostMapping("/bulkSave")
+
+        public ResponseEntity<?> saveMultipleUser(List<usermodel> list){
+            userService.saveBulk(list);
+            return  ResponseEntity.ok("successfully saved");
+    }
+
+
 
         @GetMapping("/users")
         public ResponseEntity<?> getAllUsers() {

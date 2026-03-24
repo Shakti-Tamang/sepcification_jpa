@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
         return userRepostory.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+    @Override
+    public void saveBulk(List<usermodel> list) {
+        userRepostory.saveAll(list);
+    }
 }
