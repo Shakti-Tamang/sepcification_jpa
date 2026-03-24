@@ -12,4 +12,6 @@ public interface UserService {
 
     public usermodel getUserById(Long id);
 
+    public void saveBulk(List<usermodel> list);
+
 }
