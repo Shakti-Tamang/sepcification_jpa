@@ -65,6 +65,117 @@ public class Snapshotinspringboot {
 //    SNAPSHOT = latest but unstable
 //
 //    no SNAPSHOT = stable release
-
+//
+//    Alright — let’s make this very simple and step-by-step 👍
+//
+//            🧠 1. What is a Version?
+//
+//    A version is just a number for your software.
+//
+//    Example:
+//
+//            1.0.0
+//            2.1.3
+//            3.5.10
+//
+//            👉 It tells:
+//
+//    Which stage the software is in
+//
+//    Whether it’s new / old / stable
+//
+//🔢 2. How version numbers work
+//
+//    Example:
+//
+//            1.2.3
+//
+//    Break it like this:
+//
+//    Part	Meaning
+//1	Major (big changes)
+//2	Minor (new features)
+//3	Patch (bug fixes)
+//🚀 3. What is SNAPSHOT?
+//
+//    Example:
+//
+//            1.0.0-SNAPSHOT
+//
+//👉 Means:
+//
+//            🛠️ "This version is still being built (not finished)"
+//
+//            📊 4. SNAPSHOT vs Normal Version
+//    Version	Meaning
+//1.0.0-SNAPSHOT	Work in progress 🚧
+//            1.0.0	Final version ✅
+//            🪜 5. Step-by-step lifecycle
+//    Step 1 → Start development
+//1.0.0-SNAPSHOT
+//
+//👉 Developers keep changing code
+//
+//    Step 2 → More updates
+//
+//    Still:
+//
+//            1.0.0-SNAPSHOT
+//
+//👉 Code improves again and again
+//
+//    Step 3 → Final release
+//1.0.0
+//
+//        👉 Stable version (no SNAPSHOT)
+//
+//    Step 4 → Next update
+//1.1.0-SNAPSHOT
+//
+//👉 New features being built
+//
+//🔁 6. Why SNAPSHOT is special
+//
+//    When Maven sees:
+//
+//            1.0.0-SNAPSHOT
+//
+//👉 It thinks:
+//
+//            "Let me check if there is a newer version"
+//
+//    So it may download updates again
+//
+//⚠️ 7. Important Rule
+//
+//👉 Use:
+//
+//    SNAPSHOT → during development
+//
+//    Normal version → in production
+//
+//💡 8. Real-life example
+//
+//    Think like this:
+//
+//            ✏️ SNAPSHOT = draft of your homework
+//
+//📄 FINAL = submitted homework
+//
+//🎯 Final Simple Summary
+//
+//            Version = software number
+//
+//            SNAPSHOT = not finished
+//
+//    No SNAPSHOT = finished & stable
+//
+//    SNAPSHOT keeps changing
+//
+//    Final version does NOT change
+//
+//    If you want, I can show you how Maven stores SNAPSHOT inside .m2 folder visually (very helpful to understand deeply).
+//
+//
 
 }
