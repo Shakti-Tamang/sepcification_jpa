@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
 
     private final ProductService productService;
-
     @PostMapping("/saveUserProduct/{id}")
     public ResponseEntity<?> saveProduct(@RequestBody Product entity, @PathVariable("id") Long id) {
         productService.saveUserProduct(entity, id);

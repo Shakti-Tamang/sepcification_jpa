@@ -19,6 +19,10 @@ public class CourseController {
 
     private final CourseService courtsService;
 
+//    Press Shift + Shift
+//    Type: Manage Licenses
+//    Press Enter
+
     @PostMapping("/savCourse")
 
     public ResponseEntity<?> saveCourse(@RequestBody Course course, @RequestParam("userId") Long userId) {
