@@ -14,12 +14,12 @@ import com.example.specification.model.Course;
 @Repository
 public interface CourseRepo extends JpaRepository<Course, Long>, JpaSpecificationExecutor<Course> {
 
-	@Override
-	@EntityGraph(attributePaths = {"users"})
-	List<Course> findAll();
+    @Override
+    @EntityGraph(attributePaths = {"users"})
+    List<Course> findAll();
 
-	@Override
-	@EntityGraph(attributePaths = {"users"})
-	Optional<Course> findById(Long id);
+    @Override
+    @EntityGraph(attributePaths = {"users"})
+    Optional<Course> findById(Long id);
 
 }
