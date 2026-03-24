@@ -22,6 +22,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@Data
 @Table(name = "users")
 public class usermodel {
 
